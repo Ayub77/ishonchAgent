@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:agent/allpage/drawerPage/reportsPage/orderReport.dart';
+import 'package:agent/allpage/drawerPage/reportsPage/storisiReport.dart';
 import 'package:agent/funcsion/colorhex.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,7 @@ class _ReportsState extends State<Reports> {
           children: [
             InkWell(
               onTap: (){
-
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderReport()));    
               },
               child: Container(
                 height: 80,
@@ -45,7 +47,7 @@ class _ReportsState extends State<Reports> {
             Container(height: 1,width: double.infinity,color: ColorHex.colorFromHex("#F5F5F5"),),
             InkWell(
               onTap: (){
-
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => StoriesReport()));
               },
               child: Container(
                 height: 80,
