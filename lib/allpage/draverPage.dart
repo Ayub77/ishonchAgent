@@ -99,8 +99,7 @@ class _DraverState extends State<Draver> {
                   ListTile(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Settings()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Settings()));
                     },
                     leading: SvgPicture.asset("assets/images/settings.svg"),
                     title: Text("Sozlamalar",

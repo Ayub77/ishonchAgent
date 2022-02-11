@@ -3,6 +3,7 @@
 import 'package:agent/allpage/draverPage.dart';
 import 'package:agent/allpage/glavniyPages/customers.dart';
 import 'package:agent/allpage/glavniyPages/dashboard.dart';
+import 'package:agent/allpage/glavniyPages/notification.dart';
 import 'package:agent/allpage/glavniyPages/orders.dart';
 import 'package:agent/allpage/glavniyPages/prices.dart';
 import 'package:agent/allpage/glavniyPages/update.dart';
@@ -57,9 +58,22 @@ class _GlavniyState extends State<Glavniy> {
         elevation: 0.5,
         actions: [
          currenttab==0?IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset("assets/images/notification.svg")):
-             Row(
+              onPressed: () {
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotificationPage()));
+              },
+              icon: Row(
+                children: [
+                  SvgPicture.asset("assets/images/notification.svg"),
+                  Transform.translate(offset: Offset(-8,-7),
+                  child: CircleAvatar(
+                    radius: 5,
+                    backgroundColor: ColorHex.colorFromHex("#FF4842"),
+                  ),
+                  ),
+                  
+                ],
+              )):
+             currenttab!=4?Row(
                children: [
                  IconButton(
                   onPressed: () {},
@@ -69,7 +83,7 @@ class _GlavniyState extends State<Glavniy> {
                   onPressed: () {},
                   icon: SvgPicture.asset("assets/images/filter.svg")),
                ],
-             ) ,
+             ):Container(),
           SizedBox(
             width: 7,
           )

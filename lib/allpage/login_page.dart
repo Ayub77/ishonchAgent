@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:agent/funcsion/colorhex.dart';
 import 'package:agent/funcsion/flutterToast.dart';
+import 'package:agent/network/apiConstanta.dart/api.dart';
+import 'package:agent/network/networkServices.dart/network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hive/hive.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,24 +19,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  static var box = Hive.box("MyBaza");
   bool viseblity = false;
   Icon eyeIcon = Icon(Icons.visibility_off_outlined);
-  
+
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  _callGlavniy(){
+  _callGlavniy() async{
     String username = usernameController.text.trim();
     String password = passwordController.text.trim();
-    if(username.isEmpty || password.isEmpty){
-     Utils.firetoast("Malumotlarni to'ldiring");
-    }else{
-
+    if (username.isEmpty || password.isEmpty) {
+      Utils.firetoast("Malumotlarni to'ldiring");
+    } else {
+      String basicAuth ="Basic " + base64Encode(utf8.encode('$username:$password'));
+      box.put('auth', null);
+      box.put('auth', basicAuth);
+      
+      var res = await Network.getApi(Api.apiLogin,Api.emptyParams());
+      print(res);
     }
   }
-  
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -121,14 +129,13 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 if (viseblity) {
                                   setState(() {
-                                    viseblity = false;
                                     eyeIcon = Icon(Icons.visibility_outlined);
+                                    viseblity = false;
                                   });
                                 } else {
                                   setState(() {
+                                    eyeIcon =Icon(Icons.visibility_off_outlined);
                                     viseblity = true;
-                                    eyeIcon =
-                                        Icon(Icons.visibility_off_outlined);
                                   });
                                 }
                               },
@@ -138,15 +145,21 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   _callGlavniy();
                 },
                 minWidth: double.infinity,
                 height: 50,
-                 child:Text("Kirish",style: TextStyle(color: ColorHex.colorFromHex("#FFFFFF")),),
-                 color: ColorHex.colorFromHex("#2755A5"),)
+                child: Text(
+                  "Kirish",
+                  style: TextStyle(color: ColorHex.colorFromHex("#FFFFFF")),
+                ),
+                color: ColorHex.colorFromHex("#2755A5"),
+              )
             ],
           ),
         ),

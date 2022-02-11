@@ -7,7 +7,7 @@ class Network{
 static var box = Hive.box("MyBaza");
 
 
-static Future getApi(String api, Map<String, String> params) async {
+static Future getApi(String api, Map<String, dynamic> params) async {
     var uri = Uri.http(Api.Base, api, params);
     var res = await box.get('auth');
     String auth = res ?? "";
@@ -15,7 +15,7 @@ static Future getApi(String api, Map<String, String> params) async {
       'Coutent-Type': 'application/json; charset=UTF-8',
       'Authorization': auth
     };
-    var response =    await http.get(uri, headers: head);
+    var response =  await http.get(uri, headers: head);
 
     if (response.statusCode < 299) {
       return response.body;
@@ -24,7 +24,7 @@ static Future getApi(String api, Map<String, String> params) async {
   }
 
 
- static Future postApi(String api, Map<String, String> params) async {
+ static Future postApi(String api, Map<String, dynamic> params) async {
     var uri = Uri.http(Api.Base, api);
     var res = box.get('auth');
      String auth = res ?? "";
@@ -43,7 +43,7 @@ static Future getApi(String api, Map<String, String> params) async {
 
 
 
-  static Future putApi(String api, Map<String, String> params,{String? id}) async {
+  static Future putApi(String api, Map<String, dynamic> params,{String? id}) async {
     var uri = Uri.http(Api.Base, api+"/"+id!);
     var res = box.get('auth');
      String auth = res ?? "";
@@ -60,7 +60,7 @@ static Future getApi(String api, Map<String, String> params) async {
   } 
 
 
-  static Future deleteApi(String api,String id, Map<String, String> params) async {
+  static Future deleteApi(String api,String id, Map<String, dynamic> params) async {
     
     var uri = Uri.http(Api.Base, api+"/"+id, params);
     var res = await box.get('auth');
