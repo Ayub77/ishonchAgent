@@ -84,9 +84,7 @@ class _GlavniyState extends State<Glavniy> {
                       children: [
                         IconButton(
                             onPressed: () {
-                                if (currenttab == 2) {
-                                
-                              }
+                              if (currenttab == 2) {}
                             },
                             icon: SvgPicture.asset("assets/images/search.svg")),
                         IconButton(
@@ -218,88 +216,90 @@ Future bottomsheet(BuildContext context) {
         "D kategoriya",
         "E kategoriya",
       ];
-      String select="";
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 20),
-        decoration: BoxDecoration(
-            color: ColorHex.colorFromHex("#FFFFFF"),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(7), topRight: Radius.circular(7))),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 4,
-              width: 110,
-              decoration: BoxDecoration(
-                  color: ColorHex.colorFromHex("#C4C4C4"),
-                  borderRadius: BorderRadius.circular(4)),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Ma'lumotlarni saralash",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            DropdownButtonForm(
-                currencies: items,
-                selectCurrencies: select,
-                onChanged: (value){
-                  select=value;
-                  
-                },
-                onTap: (){
-
-                },
-                labelText: "Kategoriya bo'yicha"),
-            Expanded(
-                child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: ButtonTheme(
-                            height: 55,
-                            child: OutlineButton(
-                              child: Text('Bekor qilish',
-                                  style: TextStyle(
-                                      color: ColorHex.colorFromHex("#FF4842"))),
-                              borderSide: BorderSide(
-                                color: ColorHex.colorFromHex("#FF4842"),
-                                style: BorderStyle.solid,
-                                width: 1,
+      String select = "";
+      return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 20),
+          decoration: BoxDecoration(
+              color: ColorHex.colorFromHex("#FFFFFF"),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(7), topRight: Radius.circular(7))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 4,
+                width: 110,
+                decoration: BoxDecoration(
+                    color: ColorHex.colorFromHex("#C4C4C4"),
+                    borderRadius: BorderRadius.circular(4)),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Ma'lumotlarni saralash",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              DropdownButtonForm(
+                  currencies: items,
+                  selectCurrencies: select,
+                  onChanged: (value) {
+                    select = value;
+                    setState(() {});
+                  },
+                  onTap: () {},
+                  labelText: "Kategoriya bo'yicha"),
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: ButtonTheme(
+                              height: 55,
+                              child: OutlineButton(
+                                child: Text('Bekor qilish',
+                                    style: TextStyle(
+                                        color:
+                                            ColorHex.colorFromHex("#FF4842"))),
+                                borderSide: BorderSide(
+                                  color: ColorHex.colorFromHex("#FF4842"),
+                                  style: BorderStyle.solid,
+                                  width: 1,
+                                ),
+                                onPressed: () {},
                               ),
-                              onPressed: () {},
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                            child: FlatButton(
-                          height: 55,
-                          onPressed: () {},
-                          child: Text(
-                            "Tasdiqlash",
-                            style: TextStyle(
-                                color: ColorHex.colorFromHex("#FFFFFF")),
+                          SizedBox(
+                            width: 5,
                           ),
-                          color: ColorHex.colorFromHex("#2755A5"),
-                        )),
-                      ],
-                    )))
-          ],
-        ),
-      );
+                          Expanded(
+                              child: FlatButton(
+                            height: 55,
+                            onPressed: () {},
+                            child: Text(
+                              "Tasdiqlash",
+                              style: TextStyle(
+                                  color: ColorHex.colorFromHex("#FFFFFF")),
+                            ),
+                            color: ColorHex.colorFromHex("#2755A5"),
+                          )),
+                        ],
+                      )))
+            ],
+          ),
+        );
+      });
     },
   );
 }
