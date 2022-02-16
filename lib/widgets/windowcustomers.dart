@@ -1,27 +1,29 @@
 import 'package:agent/allpage/customersClick/customerClick.dart';
 import 'package:agent/funcsion/colorhex.dart';
+import 'package:agent/funcsion/trenumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WindowCustomer extends StatelessWidget {
   const WindowCustomer({
-    Key? key,
+    Key? key, required this.ontab, required this.data,
   }) : super(key: key);
-
+  final Function ontab;
+  final dynamic data;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 220,
       width: double.infinity,
       alignment: Alignment.center,
-      padding: EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 20),
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 0.5),
       decoration: BoxDecoration(
           color: ColorHex.colorFromHex("#FFFFFF"),
           borderRadius: BorderRadius.circular(5)),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Customer()));
+          ontab();
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,15 +41,16 @@ class WindowCustomer extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 10,
-                ),
+                ), 
                 Container(
                     width: MediaQuery.of(context).size.width * 0.58,
                     child: Text(
-                      "“ISHONCH” DO‘KONLAR TARMOG‘I Uchko‘prik filiali",
+                      data['title'].toString(),
                       style: TextStyle(
                           color: ColorHex.colorFromHex("#000000"),
+                          fontFamily: "Gilroy",
                           fontWeight: FontWeight.w600,
-                          fontSize: 15),
+                          fontSize: 14),
                     ))
               ],
             ),
@@ -62,13 +65,15 @@ class WindowCustomer extends StatelessWidget {
                       style: TextStyle(
                           color: ColorHex.colorFromHex("#8896A1"),
                           fontWeight: FontWeight.w500,
+                          fontFamily: "Gilroy",
                           fontSize: 12),
                     ),
                     Text(
-                      "2 000 000 000 UZS",
+                       TreeNumber.toProcessCost(data['limit'].toString())+" UZS",
                       style: TextStyle(
                           color: ColorHex.colorFromHex("#000000"),
                           fontWeight: FontWeight.w700,
+                          fontFamily: "Gilroy",
                           fontSize: 14),
                     ),
                   ],
@@ -89,10 +94,11 @@ class WindowCustomer extends StatelessWidget {
                           fontSize: 12),
                     ),
                     Text(
-                      "400 000 000 UZS",
+                     TreeNumber.toProcessCost(data['debet'].toString())+" UZS",
                       style: TextStyle(
                           color: ColorHex.colorFromHex("#FF4842"),
                           fontWeight: FontWeight.w700,
+                          fontFamily: "Gilroy",
                           fontSize: 14),
                     ),
                   ],
@@ -114,6 +120,7 @@ class WindowCustomer extends StatelessWidget {
                       style: TextStyle(
                           color: ColorHex.colorFromHex("#A3A3A3"),
                           fontWeight: FontWeight.w500,
+                          fontFamily: "Gilroy",
                           fontSize: 10),
                     )),
                  Container(
@@ -133,6 +140,7 @@ class WindowCustomer extends StatelessWidget {
                   style: TextStyle(
                       color: ColorHex.colorFromHex("#A3A3A3"),
                       fontWeight: FontWeight.w500,
+                      fontFamily: "Gilroy",
                       fontSize: 10),
                 ),
               ],

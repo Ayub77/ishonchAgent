@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:agent/allpage/Glavniy.dart';
 import 'package:agent/funcsion/colorhex.dart';
 import 'package:agent/funcsion/flutterToast.dart';
 import 'package:agent/network/apiConstanta.dart/api.dart';
@@ -20,24 +21,30 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   static var box = Hive.box("MyBaza");
-  bool viseblity = false;
+  bool viseblity = true;
   Icon eyeIcon = Icon(Icons.visibility_off_outlined);
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  _callGlavniy() async{
+  _callGlavniy() async {
     String username = usernameController.text.trim();
     String password = passwordController.text.trim();
     if (username.isEmpty || password.isEmpty) {
       Utils.firetoast("Malumotlarni to'ldiring");
     } else {
-      String basicAuth ="Basic " + base64Encode(utf8.encode('$username:$password'));
+      String basicAuth =
+          "Basic " + base64Encode(utf8.encode('$username:$password'));
       box.put('auth', null);
       box.put('auth', basicAuth);
-      
-      var res = await Network.getApi(Api.apiLogin,Api.emptyParams());
-      print(res);
+
+      var res = await Network.getApi(Api.apiLogin, Api.emptyParams());
+      if (!res['error']) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => Glavniy()));
+      } else {
+        Utils.firetoast(res['data']);
+      }
     }
   }
 
@@ -55,8 +62,8 @@ class _LoginPageState extends State<LoginPage> {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Container(
-                height: MediaQuery.of(context).size.width * 0.65,
-                width: MediaQuery.of(context).size.width * 0.65,
+                height: 280,
+                width: 280,
                 margin: EdgeInsets.only(bottom: 40),
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -70,8 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.only(left: 15),
                       child: Text(
                         "Username",
-                        style:
-                            TextStyle(color: ColorHex.colorFromHex("#2755A5")),
+                        style: TextStyle(
+                            color: ColorHex.colorFromHex("#2755A5"),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            fontFamily: "Gilroy"),
                       )),
                   SizedBox(
                     height: 2,
@@ -104,8 +114,11 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.only(left: 15),
                       child: Text(
                         "Parol",
-                        style:
-                            TextStyle(color: ColorHex.colorFromHex("#2755A5")),
+                        style: TextStyle(
+                            color: ColorHex.colorFromHex("#2755A5"),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            fontFamily: "Gilroy"),
                       )),
                   SizedBox(
                     height: 2,
@@ -134,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                                   });
                                 } else {
                                   setState(() {
-                                    eyeIcon =Icon(Icons.visibility_off_outlined);
+                                    eyeIcon =
+                                        Icon(Icons.visibility_off_outlined);
                                     viseblity = true;
                                   });
                                 }
@@ -148,17 +162,39 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 40,
               ),
-              FlatButton(
-                onPressed: () {
-                  _callGlavniy();
-                },
-                minWidth: double.infinity,
-                height: 50,
-                child: Text(
-                  "Kirish",
-                  style: TextStyle(color: ColorHex.colorFromHex("#FFFFFF")),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorHex.colorFromHex("#2755A5").withOpacity(0.36),
+                      blurRadius: 12,
+                      spreadRadius: 0,
+                      offset: Offset(0, 4)
+                    )
+                  ]
                 ),
-                color: ColorHex.colorFromHex("#2755A5"),
+                child: Card(
+                  color: ColorHex.colorFromHex("#2755A5"),
+                  child: InkWell(
+                    onTap: () {
+                      _callGlavniy();
+                    },
+                    child: Container(
+                      height: 48,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Kirish",
+                        style: TextStyle(
+                            color: ColorHex.colorFromHex("#FFFFFF"),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            fontFamily: "Gilroy"),
+                      ),
+                    ),
+                  ),
+                ),
               )
             ],
           ),

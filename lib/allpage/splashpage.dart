@@ -6,6 +6,7 @@ import 'package:agent/allpage/Glavniy.dart';
 import 'package:agent/allpage/login_page.dart';
 import 'package:agent/funcsion/colorhex.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -15,9 +16,16 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  _initTimer() {
+  
+  _initTimer()async{
+   var box = Hive.box("MyBaza");
+   var res = await box.get("auth");
     Timer(Duration(seconds: 2), () {
+      if(res==null){
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
+      }else{
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Glavniy()));  
+      }
     });
   }
 

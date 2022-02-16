@@ -3,6 +3,9 @@
 class Api{
     static String Base = '192.168.13.54:8000';
     static String apiLogin = "api/user/login";
+    static String dashboard = "api/agent_plan/get";
+    static String prices = "api/order/get_product_variant_remains_of_organization";
+    static String customers = "api/partner/get";
 
   
 

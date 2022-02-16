@@ -18,10 +18,10 @@ class Network {
       var uri = Uri.http(Api.Base, api, params);
       var response = await http.get(uri, headers: head);
       if (response.statusCode < 299) {
-        var data = {'error': false, 'data': jsonDecode(response.body)};
+        var data = {'error': false, 'data': jsonDecode(response. body)};
         return data;
       }
-      var data = {'error': true, 'data': "xatolik"};
+      var data = {'error': true, 'data': "Foydalanuvchi aktivlashmagan"};
       return data;
     } catch (e) {
       var data = {'error': true, 'data': "Server bilan aloqa yo'q"};

@@ -56,7 +56,10 @@ class _GlavniyState extends State<Glavniy> {
         title: Text(
           names[currenttab],
           style: TextStyle(
-              color: currenttab == 0 ? appbarColor[2] : appbarColor[3]),
+              color: currenttab == 0 ? appbarColor[2] : appbarColor[3],
+              fontFamily: "Gilroy",
+              fontWeight: FontWeight.w600,
+              fontSize: 18),
         ),
         centerTitle: true,
         elevation: 0.5,
@@ -126,78 +129,55 @@ class _GlavniyState extends State<Glavniy> {
           });
         },
         // ignore: prefer_const_literals_to_create_immutables
-        items: [
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/dashboard.svg",
-                color: currenttab == 0
-                    ? ColorHex.colorFromHex("#2755A5")
-                    : ColorHex.colorFromHex("#8896A1"),
-              ),
-              title: Text(
-                "Dashboard",
-                style: TextStyle(
-                    color: currenttab == 0
-                        ? ColorHex.colorFromHex("#2755A5")
-                        : ColorHex.colorFromHex("#8896A1")),
-              )),
+            icon: SvgPicture.asset(
+              "assets/images/dashboard.svg",
+              color: currenttab == 0
+                  ? ColorHex.colorFromHex("#2755A5")
+                  : ColorHex.colorFromHex("#8896A1"),
+            ),
+            label: "Dashboard",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/costs.svg",
-                color: currenttab == 1
-                    ? ColorHex.colorFromHex("#2755A5")
-                    : ColorHex.colorFromHex("#8896A1"),
-              ),
-              title: Text(
-                "Narxlar",
-                style: TextStyle(
-                    color: currenttab == 1
-                        ? ColorHex.colorFromHex("#2755A5")
-                        : ColorHex.colorFromHex("#8896A1")),
-              )),
+            icon: SvgPicture.asset(
+              "assets/images/costs.svg",
+              color: currenttab == 1
+                  ? ColorHex.colorFromHex("#2755A5")
+                  : ColorHex.colorFromHex("#8896A1"),
+            ),
+            label: "Narxlar",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/persons.svg",
-                color: currenttab == 2
-                    ? ColorHex.colorFromHex("#2755A5")
-                    : ColorHex.colorFromHex("#8896A1"),
-              ),
-              title: Text(
-                "Mijozlar",
-                style: TextStyle(
-                    color: currenttab == 2
-                        ? ColorHex.colorFromHex("#2755A5")
-                        : ColorHex.colorFromHex("#8896A1")),
-              )),
+            icon: SvgPicture.asset(
+              "assets/images/persons.svg",
+              color: currenttab == 2
+                  ? ColorHex.colorFromHex("#2755A5")
+                  : ColorHex.colorFromHex("#8896A1"),
+            ),
+            label: "Mijozlar",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/corzinka.svg",
-                color: currenttab == 3
-                    ? ColorHex.colorFromHex("#2755A5")
-                    : ColorHex.colorFromHex("#8896A1"),
-              ),
-              title: Text(
-                "Buyurtmalar",
-                style: TextStyle(
-                    color: currenttab == 3
-                        ? ColorHex.colorFromHex("#2755A5")
-                        : ColorHex.colorFromHex("#8896A1")),
-              )),
+            icon: SvgPicture.asset(
+              "assets/images/corzinka.svg",
+              color: currenttab == 3
+                  ? ColorHex.colorFromHex("#2755A5")
+                  : ColorHex.colorFromHex("#8896A1"),
+            ),
+            label: "Buyurtmalar",
+          ),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/refresh.svg",
-                color: currenttab == 4
-                    ? ColorHex.colorFromHex("#2755A5")
-                    : ColorHex.colorFromHex("#8896A1"),
-              ),
-              title: Text(
-                "Yangilash",
-                style: TextStyle(
-                    color: currenttab == 4
-                        ? ColorHex.colorFromHex("#2755A5")
-                        : ColorHex.colorFromHex("#8896A1")),
-              )),
+            icon: SvgPicture.asset(
+              "assets/images/refresh.svg",
+              color: currenttab == 4
+                  ? ColorHex.colorFromHex("#2755A5")
+                  : ColorHex.colorFromHex("#8896A1"),
+            ),
+            label: "Yangilash",
+          ),
         ],
+        activeColor: ColorHex.colorFromHex("#2755A5"),
+        inactiveColor: ColorHex.colorFromHex("#8896A1"),
       ),
     );
   }
